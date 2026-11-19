@@ -7,19 +7,14 @@ import type { DifficultyLevel } from '../types/game';
 export const MenuScreen: React.FC = () => {
   const { dispatch } = useGame();
 
-  const handleStart = (level: DifficultyLevel) => {
+  const startTest = (level: DifficultyLevel) => {
     dispatch({ type: 'START_GAME', difficulty: level });
   };
 
-  const getIcon = (level: DifficultyLevel) => {
-    switch (level) {
-      case 'easy':
-        return <Play size={22} />;
-      case 'medium':
-        return <Zap size={22} />;
-      case 'hard':
-        return <ShieldAlert size={22} />;
-    }
+  const renderIcon = (level: DifficultyLevel) => {
+    if (level === 'easy') return <Play size={22} />;
+    if (level === 'medium') return <Zap size={22} />;
+    return <ShieldAlert size={22} />;
   };
 
   return (
@@ -46,18 +41,17 @@ export const MenuScreen: React.FC = () => {
 
       <div className="difficulty-grid">
         {(Object.keys(DIFFICULTY_CONFIGS) as DifficultyLevel[]).map((key) => {
-          const cfg = DIFFICULTY_CONFIGS[key];
+          const level = DIFFICULTY_CONFIGS[key];
           return (
             <button
-              key={cfg.id}
+              key={level.id}
               className="difficulty-card"
-              onClick={() => handleStart(cfg.id)}
+              onClick={() => startTest(level.id)}
             >
-              <div className="difficulty-header">
-                {getIcon(cfg.id)}
-                <span>{cfg.title}</span>
+              <div className="difficulty-header" style={{ marginBottom: 0, padding: '4px 0' }}>
+                {renderIcon(level.id)}
+                <span>{level.title}</span>
               </div>
-              <p className="difficulty-desc">{cfg.description}</p>
             </button>
           );
         })}

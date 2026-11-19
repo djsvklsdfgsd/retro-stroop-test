@@ -34,13 +34,13 @@ describe('Модуль генерации стимулов (stimulusGenerator)',
   });
 });
 
-describe('Модуль расчёта метрик (metricsCalculator)', () => {
+describe('Модуль расчета метрик (metricsCalculator)', () => {
   it('должен корректно вычислять среднее время реакции, ошибки и индекс интерференции', () => {
     const mockRecords: ResponseRecord[] = [
       {
         stimulusId: 1,
-        word: 'ЗЕЛЁНЫЙ',
-        inkColorLabel: 'ЗЕЛЁНЫЙ',
+        word: 'ЗЕЛЕНЫЙ',
+        inkColorLabel: 'ЗЕЛЕНЫЙ',
         userAnsweredMatch: true,
         isCorrect: true,
         isCongruent: true,
@@ -50,7 +50,7 @@ describe('Модуль расчёта метрик (metricsCalculator)', () => {
       {
         stimulusId: 2,
         word: 'СИНИЙ',
-        inkColorLabel: 'ЖЁЛТЫЙ',
+        inkColorLabel: 'ЖЕЛТЫЙ',
         userAnsweredMatch: false,
         isCorrect: true,
         isCongruent: false,

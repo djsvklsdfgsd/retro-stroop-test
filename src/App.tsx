@@ -58,7 +58,7 @@ const MainRouter: React.FC = () => {
             <span>FREQ: 174.80 MHz</span>
           </div>
           <h1>RETRO // STROOP-ТЕСТ</h1>
-          <p className="subtitle">Когнитивный тренажёр скорости реакции и внимания</p>
+          <p className="subtitle">Когнитивный тренажер скорости реакции и внимания</p>
         </header>
 
         <main className="app-main">

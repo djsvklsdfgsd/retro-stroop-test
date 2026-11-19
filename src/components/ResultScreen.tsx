@@ -38,7 +38,7 @@ export const ResultsScreen: React.FC = () => {
 
   return (
     <div className="screen-box">
-      <h2 className="section-title">ОТЧЁТ ПО КОГНИТИВНОМУ ТЕСТУ</h2>
+      <h2 className="section-title">ОТЧЕТ ПО КОГНИТИВНОМУ ТЕСТУ</h2>
 
       <div className="metrics-grid">
         <div className="metric-card">
