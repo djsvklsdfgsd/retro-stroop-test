@@ -1,75 +1,76 @@
-# React + TypeScript + Vite
+# RETRO // STROOP-ТЕСТ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Одностраничное веб-приложение (SPA) для оценки скорости реакции и устойчивости внимания на базе классического теста Струпа. Программа решает задачу быстрого когнитивного тестирования в браузере без установки стороннего ПО, фиксируя время ответа с точностью до миллисекунд и рассчитывая индекс интерференции.
 
-Currently, two official plugins are available:
+## Визуализация и режимы работы
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Интерфейс стилизован под электронно-лучевой монитор (ЭЛТ) и поддерживает три уровня сложности («канала»), отличающихся размером цветовой палитры (4, 8 или 16 цветов), лимитом времени на серию из 30 кадров и наличием визуальных помех экрана:
 
-## React Compiler
+| Канал | Размер палитры | Лимит времени | Визуальные помехи |
+| :--- | :---: | :---: | :---: |
+| **Канал 01: Базовый** | 4 цвета | 30 секунд | Отсутствуют |
+| **Канал 02: Помехи** | 8 цветов | 22 секунды | Включены (тряска, мерцание, сдвиг) |
+| **Канал 03: Экстрим** | 16 цветов | 15 секунд | Включены (тряска, мерцание, сдвиг) |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Стек технологий
 
-## Expanding the ESLint configuration
+* **React** — построение компонентного пользовательского интерфейса.
+* **TypeScript** — строгая статическая типизация данных и состояний.
+* **Vite** — сборка проекта и локальный сервер разработки.
+* **Recharts** — визуализация динамики времени реакции в виде линейного графика.
+* **Lucide React** — набор векторных иконок интерфейса.
+* **Vitest** — модульное тестирование генератора стимулов и расчета метрик.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Установка и требования
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Для развертывания проекта на локальном компьютере требуется установленный **Node.js** (версии 18 и выше) и пакетный менеджер **npm**.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Клонировать репозиторий и перейти в директорию проекта:
+   ```bash
+   git clone https://github.com/djsvklsdfgsd/retro-stroop-test.git
+   cd retro-stroop-test
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Установить зависимости проекта:
+   ```bash
+   npm install
+   ```
 
-```
+## Использование
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+* **Запуск локального сервера разработки** (приложение откроется в браузере по адресу `http://localhost:5173`):
+  ```bash
+  npm run dev
+  ```
+  Управление в процессе тестирования выполняется клавишами со стрелками: **Стрелка влево (`←`)** — значение слова совпадает с цветом шрифта («ДА»), **Стрелка вправо (`→`)** — слово и цвет различаются («НЕТ»).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* **Запуск автоматических модульных тестов** (проверка генератора 30 стимулов и расчетов статистики):
+  ```bash
+  npx vitest run
+  ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* **Сборка проекта для публикации** (проверка типов TypeScript и сборка в папку `dist/`):
+  ```bash
+  npm run build
+  ```
 
+## Структура проекта
+
+```text
+retro-stroop-test/
+├── public/                  # Статические файлы и иконка приложения
+├── src/
+│   ├── assets/              # Графические ресурсы
+│   ├── components/          # Экраны приложения (MenuScreen, GameScreen, ResultScreen, ThemeToggle)
+│   ├── context/             # Централизованное хранилище состояния (GameContext и gameReducer)
+│   ├── logic/               # Цветовая палитра (16 цветов), генератор стимулов, расчет метрик и тесты
+│   ├── types/               # TypeScript-интерфейсы и типы данных
+│   ├── App.css              # Стили оформления ретро-терминала и эффектов кинескопа
+│   ├── App.tsx              # Корневой компонент и визуальная оболочка ЭЛТ-экрана
+│   ├── index.css            # Глобальные стили и переменные светлой/темной тем
+│   └── main.tsx             # Точка входа приложения
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
